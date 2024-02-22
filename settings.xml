@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+
+    <mirrors>
+        <mirror>
+            <id>shared-libs-repository</id>
+            <url>http://10.96.46.115:8081/repository/shared_libs/</url>
+            <name>shared-libs</name>
+            <mirrorOf>*,!nexus,!nexus-central,!nexus-redhat,!nexus-redhatearly,!nexus-spring</mirrorOf>
+        </mirror>
+        <mirror>
+            <id>nexus-repository</id>
+            <url>http://10.96.46.115:8081/repository/maven-public/</url>
+            <name>nexus</name>
+            <mirrorOf>*,!shared-libs,!nexus-central,!nexus-redhat,!nexus-redhatearly,!nexus-spring</mirrorOf>
+        </mirror>
+        <mirror>
+            <id>nexus-central-repository</id>
+            <url>http://10.96.46.115:8081/repository/maven-central/</url>
+            <name>nexus-central</name>
+            <mirrorOf>*,!shared-libs,!nexus,!nexus-redhat,!nexus-redhatearly,!nexus-spring</mirrorOf>
+        </mirror>
+        <mirror>
+            <id>nexus-redhat-repository</id>
+            <url>http://10.96.46.115:8081/repository/redhat/</url>
+            <name>nexus-redhat</name>
+            <mirrorOf>*,!shared-libs,!nexus,!nexus-central,!nexus-redhatearly,!nexus-spring</mirrorOf>
+        </mirror>
+        <mirror>
+            <id>nexus-redhatearly-repository</id>
+            <url>http://10.96.46.115:8081/repository/redhat-earlyaccess/</url>
+            <name>nexus-redhatearly</name>
+            <mirrorOf>*,!shared-libs,!nexus,!nexus-central,!nexus-redhat,!nexus-spring</mirrorOf>
+        </mirror>
+        <mirror>
+            <id>nexus-spring-repository</id>
+            <url>http://10.96.46.115:8081/repository/sprintIO-release/</url>
+            <name>nexus-spring</name>
+            <mirrorOf>*,!shared-libs,!nexus,!nexus-central,!nexus-redhat,!nexus-redhatearly</mirrorOf>
+        </mirror>
+        
+    </mirrors>
+</settings>

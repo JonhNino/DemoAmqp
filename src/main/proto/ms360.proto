@@ -1,0 +1,421 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "dom.com.bpd.proto.bpdservices";
+option java_outer_classname = "BPDServiceSProto";
+
+package bpdservices;
+
+service BPDServiceS {
+    // @Todo se cambia a Minuscula rpc
+    rpc GetProduct_accountQuery (RequestMessageAccountQuery) returns (ProductResponse_AccountQuery){}
+    rpc GetProduct_ProfileProduct (RequestMessageProfileProduct) returns (ProductResponse_ProfileProduct){}    
+}
+
+
+message RequestMessageAccountQuery { 
+    string ID = 1; // No. documento
+    string IDTYPE = 2; // CEDULA|RNC|PASAPORTE
+    string PRODUCT_TYPE = 3; // ALL|SAVINGS|CHECKINGS|MONEYMARKET|LOAN
+    repeated ADDITIONAL_PRODUCT additional_product=4;
+}
+
+message ADDITIONAL_PRODUCT {
+    string number =1;
+    string Type=2;
+    string Currency=3;
+}
+
+message RequestMessageProfileProduct { 
+    int32 ID = 1; //No. documento  @TODO cambie el tipo de int a int32
+    string IDTYPE = 2; //CEDULA|RNC|PASAPORTE
+    string PRODUCT_TYPE = 3; //ALL|SAVINGS|CHECKINGS|MONEYMARKET|LOAN
+}
+
+message ProductResponse_AccountQuery { 
+    int32 ID = 1; 
+    string IDTYPE = 2; //CEDULA|RNC|PASAPORTE
+    string PRODUCT_TYPE = 3; //ALL|SAVINGS|CHECKINGS|MONEYMARKET|LOAN
+    CLIENT_EBANKING client_ebanking=4;
+    PRODUCTS_ACCOUNTQUERY product_AccountQuery = 5; //array con los productos ICBS
+}
+
+message ProductResponse_ProfileProduct { 
+    int32 ID = 1; 
+    string IDTYPE = 2; //CEDULA|RNC|PASAPORTE
+    string PRODUCT_TYPE = 3; //ALL|SAVINGS|CHECKINGS|MONEYMARKET|LOAN
+    CLIENT_IFC client_ifc=4;
+    PRODUCTS_IFC product_ifc = 5; //array con los productos ICBS
+}
+
+message CLIENT_EBANKING{
+    string Apellidos=1;
+    string Nombres=2;
+    string Email=3;
+    string Pais=4;
+    string Telefono1=5;
+    string Telefono2=6;
+    string Administrador=7;
+    string Tipo=8;
+    string Segmento=9;
+    string IdGerente=10;
+    string Timeout=11;
+    string CodigoEmpleadoOficial=12;
+    string NombreOficial=13;
+    string BeneficiariosEnLine=14;
+    string Codigo=15;
+    string CodigoOficina=16;
+    string NombreOficina=17;
+    string CodigoZona=18;
+    string NombreZona=19;
+    string NumDocumento2=20;
+    string TipoDocumento2=21;
+    string EMailValidadoAlgunaVez=22;
+    string SubSegmento=23;
+    string STATUS=24;
+    string REQUESTTYPE=25;
+    string DireccionICBS=26;
+    string TelefonoICBS=27;
+    string CiudadICBS=28;
+    string Identificacion_Numero=29;   
+}
+
+message CLIENT_IFC{
+    string DOC_TYPE=1;
+    string DOC_NUMBER=2;
+    string CUST_CIF=3;
+    string NAME=4;
+    string SHORTNAME=5;
+    string CUST_SEG=6;
+    string MNGRID=7;
+    string MNGR_EMPLOYEEID=8;
+    string MANAGER_NAME=9;
+    string BRANCH_ID=10;
+    string BRANCH_NAME=11;
+    string ZONE_ID=12;
+    string ZONE_NAME=13;
+    string ADDRESS=14;
+    string GENDER=15;
+    string BIRTHDATE=16;
+    string EEMAIL=17;
+    string ACT_ACC_NUMBER=18;
+}
+
+
+message PRODUCTS_ACCOUNTQUERY {
+    repeated ACCOUNTS_ACCOUNTQUERY account=1;
+    repeated LOANS_ACCOUNTQUERY loan=2;
+    repeated MONEYMARKET_ACCOUNTQUERY moneymarket=3;
+    repeated TC_ACCOUNTQUERY tc=4;
+}
+
+
+message PRODUCTS_IFC {
+    repeated ACCOUNTS_IFC account=1; /// @ Se corrige con el nombre correcto ACCOUNTS_IFC
+    repeated LOANS_IFC loan=2;
+    repeated MONEYMARKET_IFC moneymarket=3;
+    repeated TC_IFC tc=4;
+}
+
+message ACCOUNTS_ACCOUNTQUERY {
+string Id=1;
+string Tipo=2;
+string Numero=3;
+string Alias=4;
+string VIsible=5;
+string Balance_Disponible=6;
+string Balance_Actual=7;
+string Balance_en_Transito=8; // Falta _ en el nombre
+string Tipo_de_Cuenta=9;    // Falta _ en el nombre
+string Moneda=10;
+string Status_de_la_Cuenta=11;
+string Oficina=12;
+string Relacion=13;
+string Apertura_Emision=14;
+string Tasa_de_Interes=15;
+string Monto_Linea_ACA=16;
+string Monto_Sobregiro_TOD=17;
+string Monto_Pignorado=18;
+string Bloqueos=19;
+string Balance_Inicio_del_Dia=20;
+string Transito_a_1_Dia=21;
+string Transito_a_2_Dias=22;
+string Transito_a_3_Dias=23;
+string Transito_a_4_Dias=24;
+string Transito_a_5_Dias=25;
+string Transito_a_6_o_Mas_Dias=26;
+string Interes_ganado_no_pagado=27;
+string Balance_promedio_mes_Actual=28;
+string Balance_promedio_12_Meses=29;
+string Balance_LiqUlt_12_Meses=30;
+string Balance_Ultimo_Corte=31;
+string Fecha_Ultimo_Corte=32;
+string Fecha_Proximo_Corte=33;
+string Disponible_Linea_de_Reserva=34;
+string Limite_Linea_de_Reserva=35;
+string Monto_Utilizado_Linea_de_Reserva=36;
+string Fecha_de_millas=37;
+string Total_Millas_Acumuladas=38;
+string Millas_Ganadas_en_el_ano=39;
+string Millas_Redimidas_en_el_ano=40;
+string Millas_vencen_en_el_ano=41;
+string Nombre_de_producto=42;
+string Check_Credit_Account=43;
+string Ind_Check_Credit_Account=44;
+string Account_to_Provide=45;
+string Account_to_Provide_Type=46;
+string Limite_Restante=47;
+string Tasa_linea_ACA=48;
+string Tasa_Sobregiro_TOD=49;
+string Dias_de_Sobregiros=50;
+string Fecha_Vencimiento_ACA=51;
+string Uso_ACA=52;
+string Regional_Account=53;
+string Status_Regional_Account=54;
+string Posee_Visa_Debito=55;
+bool additional=56;
+string Core=57;
+
+}
+
+message LOANS_ACCOUNTQUERY
+{
+
+string Id=1;
+string Tipo=2;
+string Numero=3;
+string Alias=4;
+string VIsible=5;
+string Monto_Original=6;
+string Balance_Actual=7;
+string Balance_Disponible=8;
+string Balance_Capital=9;
+string Tipo_de_Cuenta=10;
+string Moneda=11;
+string Cuota_Mensual=12;
+string Relacion=13;
+string Apertura_Emision=14;
+string Fecha_Vencimiento=15;
+string Tasa_de_Interes_Vigente=16;
+string Monto_Prestamo=17;
+string Garantia=18;
+string Codigo_Del_Abogado=19;
+string Monto_Castigado=20;
+string Total_en_Mora=21;
+string Fecha_Mora_30_dias=22;
+string Fecha_Mora_60_dias=23;
+string Fecha_Mora_90_dias=24;
+string Fecha_Mora_150_dias=25;
+string Fecha_Mora_mas150_dias=26;
+string Veces_en_Mora_1=27;
+string Veces_en_Mora_2=28;
+string Veces_en_Mora_3=29;
+string Veces_en_Mora_30=30;
+string Veces_en_Mora_60=31;
+string Veces_en_Mora_90=32;
+string Pagos_en_Mora_Valor=33; // Se retira caracter "
+string Saldo_de_Interes=34;
+string Saldo_para_Cancelacion=35;
+string Estado=36;
+string Balance_de_Interes=37;
+string Otros_Cargos=38;
+string No_Cuenta_Prevee_paga=39;
+string No_Cuota_Original=40;
+string No_Cuotas_Pendientes=41;
+string Forma_de_Pago=42;
+string Fecha_Ultimo_pago=43;
+string Proxima_fecha_de_pago=44;
+string Prestamo_en_Legal=45;
+string No_Acumulacion=46;
+string Saldo_de_Capital=47;
+string Numero_de_producto=48;
+string Nombre_de_producto=49;
+string Dias_de_Atraso=50;
+string Linea_de_Credito=51;
+string Nombre=52;
+string Fecha_Castigo=53;
+string Capital_Castigado=54;
+string Interes_Castigado=55;
+string Tipo_de_Garantia=56;
+string Valor_Administracion_Garantia=57;
+string Moneda_Garantia=58;
+string Excepcion=59;
+string Capital_Recuperado=60;
+string Interes_Recuperado=61;
+string Ultima_Fecha_Desembolso=62;
+//bool additional=63; // @TODO campo duplicado con diferente tipo
+
+
+}
+
+message MONEYMARKET_ACCOUNTQUERY
+{
+
+string Id=1;
+string Tipo=2;
+string Numero=3;
+string Alias=4;
+string VIsible=5;
+string Balance_Actual=7;
+string Tipo_de_Cuenta=10;
+string Moneda=11;
+string Interes_ganado_no_pagado=12;
+string Relacion=13;
+string Apertura_Emision=14;
+string Fecha_Vencimiento=15;
+string Tasa_de_Interes=16;
+string Pignoracion=17;
+string Estado=18;
+string Monto_emision=19;
+string Forma_Pago=20;
+string No_Cuenta_si_Pago_es_Cr_Cta=21;
+string Nombre_Beneficiario=22;
+string Fecha_Pago_Proximo_Interes=23; // Se agrega _
+string Fecha_Renovacion=24;
+string Numero_de_producto=25;
+string Nombre_de_producto=26;
+string Plazo=27;
+bool additional=28;
+
+}
+
+message TC_ACCOUNTQUERY
+{
+
+string Id=1;
+string Tipo=2;
+string Numero=3;
+string Alias=4;
+string VIsible=5;
+string Hiddeen=6;
+string Estatus_Bloqueo=7;
+string Oficina_Oficial=8;
+string Moneda=11;
+string Tipo_Producto=12;
+string Limite_Credito=13;
+string Balance_Actual=14;
+string Balance_Disponible=15;
+string Monto_Vencido=16;
+string Monto_Ultimo_Pago=17;
+string Fecha_Ultimo_Pago=18;
+string Fecha_Vence_Pago=19;
+//string Pago_minimo=20; // @Campo duplicado
+string Ciclo_Corte=21;
+string Fecha_Vence_Tarjeta=22;
+string Fecha_de_Corte=23;
+string Pago_Minimo=24; 
+string Cuotas_Vencidas=25;
+string Dias_de_Mora=26;
+string Tasa_de_Interes=27;
+string BalanceMes=28;
+string FechaPago=29;
+string MontoPagado=30;
+string Numero_de_Cuenta=31; // falta ;
+string Ultima_actualizacion=32;
+bool additional=33;
+
+}
+
+
+message ACCOUNTS_IFC
+{
+
+string APP_ID=1;
+string Number=2;
+string Type=3;
+string Currency=4;
+string Status_ID=5;
+string Block_ID=6;
+string Current_Balance=7;
+string Aviable_Balance=8;
+string Relation=9;
+string Rate=10;
+string Join_to_Account=11;
+string Code=12;
+string In_Legal=13;
+string Alias_Name=14;
+string Owner=15;
+string Hidden=16;
+string ReadOnly=17;
+string Acc_opening_Date=18;
+
+}
+
+message LOANS_IFC
+{
+
+string APP_ID=1;
+string Number=2;
+string Type=3;
+string Currency=4;
+string Status_ID=5;
+string Block_ID=6;
+string Current_Balance=7;
+string Aviable_Balance=8;
+string Relation=9;
+string Rate=10;
+string Join_to_Account=11;
+string Code=12;
+string In_Legal=13;
+string Alias_Name=14;
+string Owner=15;
+string Hidden=16;
+string ReadOnly=17;
+string Acc_opening_Date=18;
+string Payment_Date=19;
+string Payment_Amount=20;
+
+}
+
+message MONEYMARKET_IFC
+{
+
+string APP_ID=1;
+string Number=2;
+string Type=3;
+string Currency=4;
+string Status_ID=5;
+string Block_ID=6;
+string Current_Balance=7;
+string Aviable_Balance=8;
+string Relation=9;
+string Rate=10;
+string Join_to_Account=11;
+string Code=12;
+string In_Legal=13;
+string Alias_Name=14;
+string Owner=15;
+string Hidden=16;
+string ReadOnly=17;
+string Acc_opening_Date=18;
+
+}
+
+message TC_IFC
+{
+
+
+string APP_ID=1;
+string Number=2;
+string Type=3;
+string Currency=4;
+string Status_ID=5;
+string Block_ID=6;
+string Current_Balance=7;
+string Aviable_Balance=8;
+string Relation=9;
+string Rate=10;
+string Join_to_Account=11;
+string Code=12;
+string In_Legal=13;
+string Alias_Name=14;
+string Owner=15;
+string Hidden=16;
+string ReadOnly=17;
+string Acc_opening_Date=18;
+string Payment_Date=19;
+string Payment_Amount=20;
+
+}
+
+
